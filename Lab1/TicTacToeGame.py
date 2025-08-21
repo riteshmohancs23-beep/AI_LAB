@@ -1,6 +1,5 @@
 import math
 
-# Function to print the board
 def print_board(board):
     print()
     for i in range(3):
@@ -9,58 +8,48 @@ def print_board(board):
             print("---------")
     print()
 
-# Check if someone has won
 def check_winner(board, player):
-    # Rows and Columns
     for i in range(3):
-        if all(board[i][j] == player for j in range(3)):  # Row
+        if all(board[i][j] == player for j in range(3)):
             return True
-        if all(board[j][i] == player for j in range(3)):  # Column
+        if all(board[j][i] == player for j in range(3)):
             return True
-    # Diagonals
     if all(board[i][i] == player for i in range(3)) or all(board[i][2 - i] == player for i in range(3)):
         return True
     return False
 
-# Check if board is full (draw)
 def is_full(board):
     return all(board[i][j] != " " for i in range(3) for j in range(3))
 
-# Minimax Algorithm (backtracking)
 def minimax(board, depth, is_maximizing):
-    # Base cases: check win/lose/draw
-    if check_winner(board, "O"):  # Computer wins
+    if check_winner(board, "O"):
         return 1
-    if check_winner(board, "X"):  # User wins
+    if check_winner(board, "X"):
         return -1
-    if is_full(board):  # Draw
+    if is_full(board):
         return 0
 
-    # If it's computer's turn (maximize score)
     if is_maximizing:
         best_score = -math.inf
         for i in range(3):
             for j in range(3):
-                if board[i][j] == " ":  # Try available move
+                if board[i][j] == " ":
                     board[i][j] = "O"
-                    score = minimax(board, depth + 1, False)  # Recurse for opponent
-                    board[i][j] = " "  # Undo move (backtracking)
+                    score = minimax(board, depth + 1, False)
+                    board[i][j] = " "
                     best_score = max(best_score, score)
         return best_score
-
-    # If it's user's turn (minimize score)
     else:
         best_score = math.inf
         for i in range(3):
             for j in range(3):
-                if board[i][j] == " ":  # Try available move
+                if board[i][j] == " ":
                     board[i][j] = "X"
-                    score = minimax(board, depth + 1, True)  # Recurse for opponent
-                    board[i][j] = " "  # Undo move (backtracking)
+                    score = minimax(board, depth + 1, True)
+                    board[i][j] = " "
                     best_score = min(best_score, score)
         return best_score
 
-# Function to find best move for computer
 def best_move(board):
     best_score = -math.inf
     move = None
@@ -68,22 +57,20 @@ def best_move(board):
         for j in range(3):
             if board[i][j] == " ":
                 board[i][j] = "O"
-                score = minimax(board, 0, False)  # Simulate user next
+                score = minimax(board, 0, False)
                 board[i][j] = " "
                 if score > best_score:
                     best_score = score
                     move = (i, j)
     return move
 
-# Main Game Loop
 def play_game():
     board = [[" "]*3 for _ in range(3)]
-    print("Welcome to Tic Tac Toe! You are X, Computer is O .\n")
+    print("Welcome to Tic Tac Toe! You are X, Computer is O.\n")
     
     print_board(board)
 
     while True:
-        # User's Move
         while True:
             try:
                 move = int(input("Enter your move (1-9): ")) - 1
@@ -105,7 +92,6 @@ def play_game():
             print("It's a draw!")
             break
 
-        # Computer's Move (uses minimax + backtracking)
         print("Computer is thinking...")
         row, col = best_move(board)
         board[row][col] = "O"
@@ -119,5 +105,86 @@ def play_game():
             print("It's a draw!")
             break
 
-# Run the game
 play_game()
+
+
+
+# #OUTPUT 
+# Welcome to Tic Tac Toe! You are X, Computer is O .
+
+
+#   |   |  
+# ---------
+#   |   |  
+# ---------
+#   |   |  
+
+# Enter your move (1-9):  o
+# Invalid input! Enter a number between 1-9.
+# Enter your move (1-9):  1
+
+# X |   |  
+# ---------
+#   |   |  
+# ---------
+#   |   |  
+
+# Computer is thinking...
+
+# X |   |  
+# ---------
+#   | O |  
+# ---------
+#   |   |  
+
+# Enter your move (1-9):  4
+
+# X |   |  
+# ---------
+# X | O |  
+# ---------
+#   |   |  
+
+# Computer is thinking...
+
+# X |   |  
+# ---------
+# X | O |  
+# ---------
+# O |   |  
+
+# Enter your move (1-9):  6
+
+# X |   |  
+# ---------
+# X | O | X
+# ---------
+# O |   |  
+
+# Computer is thinking...
+
+# X | O |  
+# ---------
+# X | O | X
+# ---------
+# O |   |  
+
+# Enter your move (1-9):  7
+# That spot is taken, try again.
+# Enter your move (1-9):  3
+
+# X | O | X
+# ---------
+# X | O | X
+# ---------
+# O |   |  
+
+# Computer is thinking...
+
+# X | O | X
+# ---------
+# X | O | X
+# ---------
+# O | O |  
+
+# Computer wins!
