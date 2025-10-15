@@ -57,4 +57,27 @@ print("TRUTH TABLE")
 df
 
 
+# OUTPUT:
 
+
+
+
+
+#     P     Q     R   Q→P  P→¬Q   Q∨R    KB   R→P   Q→R
+# False False False  True  True False False  True  True
+# False False  True  True  True  True  True False  True
+# False  True False False  True  True False  True False
+# False  True  True False  True  True False False  True
+#  True False False  True  True False False  True  True
+#  True False  True  True  True  True  True  True  True
+#  True  True False  True False  True False  True False
+#  True  True  True  True False  True False  True  True
+
+# Models where KB is TRUE:
+# P=False, Q=False, R=True
+# P=True, Q=False, R=True
+
+# Entailment Results:
+# KB ⊨ R: True
+# KB ⊨ (R → P): False
+# KB ⊨ (Q → R): True
