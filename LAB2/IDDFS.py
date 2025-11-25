@@ -41,4 +41,4 @@ if __name__ == "__main__":
 
     start = 'A'
     goal = 'K'
-    iddfs(sta
+    iddfs(state)
