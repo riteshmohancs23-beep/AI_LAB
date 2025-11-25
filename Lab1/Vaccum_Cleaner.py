@@ -25,9 +25,9 @@ def vacuum_cleaner():
             print(f"{room} is Dirty. Cleaning...")
             rooms[room] = "Clean"
             time.sleep(1)
-            print(f"{room} is now Clean ✅")
+            print(f"{room} is now Clean ")
         else:
-            print(f"{room} is already Clean ✅")
+            print(f"{room} is already Clean ")
         time.sleep(1)
 
     print("\nAll rooms have been checked and cleaned!\n")
@@ -53,18 +53,18 @@ print_status()
 
 
 # Vacuum enters Room A...
-# Room A is already Clean ✅
+# Room A is already Clean 
 
 # Vacuum enters Room B...
 # Room B is Dirty. Cleaning...
-# Room B is now Clean ✅
+# Room B is now Clean 
 
 # Vacuum enters Room C...
 # Room C is Dirty. Cleaning...
-# Room C is now Clean ✅
+# Room C is now Clean 
 
 # Vacuum enters Room D...
-# Room D is already Clean ✅
+# Room D is already Clean 
 
 # All rooms have been checked and cleaned!
 
